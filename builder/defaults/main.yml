@@ -1,2 +1,3 @@
 ---
 # defaults file for builder
+dest_folder: /root
