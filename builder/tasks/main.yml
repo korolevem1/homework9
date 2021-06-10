@@ -11,11 +11,17 @@
   file:
     path: /home/mywebapplication
     state: absent
-    notify:
-      - get git project
+
+- name: get git project
+  git: repo='https://github.com/tarekkhoury/mywebapplication.git' dest=/home/mywebapplication
+
 
 - name: make war
   shell:
     cmd:  mvn -f /home/mywebapplication/pom.xml clean package
-    notify:
-      - copy file to prod
+    
+
+- name: copy file to prod
+  synchronize: src=/home/mywebapplication/target/mywebapplication.war dest=/var/lib/tomcat9/webapps/ mode=pull
+  delegate_to: prod
+
