@@ -4,5 +4,3 @@
   apt:
     name: tomcat9
     state: present
-    notify:
-      - tomcat check and start
