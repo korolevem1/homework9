@@ -1,2 +1,9 @@
 ---
 # handlers file for builder
+
+- name: get git project
+  git: repo= 'https://github.com/tarekkhoury/mywebapplication.git' dest=/home/mywebapplication
+
+- name: copy file to prod
+  synchronize: src=/home/mywebapplication/target/mywebapplication.war dest=/var/lib/tomcat9/webapps/ mode=pull
+  delegate_to: prod

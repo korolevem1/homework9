@@ -1,2 +1,8 @@
 ---
 # tasks file for prod
+- name: install tomcat9
+  apt:
+    name: tomcat9
+    state: present
+    notify:
+      - tomcat check and start

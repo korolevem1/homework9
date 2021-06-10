@@ -1,2 +1,21 @@
 ---
 # tasks file for builder
+- name: Ensure package
+  apt: name={{item}} state=installed
+  with_items:
+       - maven
+       - git
+
+
+- name: Ensure that work dir is present in builder
+  file:
+    path: /home/mywebapplication
+    state: absent
+    notify:
+      - get git project
+
+- name: make war
+  shell:
+    cmd:  mvn -f /home/mywebapplication/pom.xml clean package
+    notify:
+      - copy file to prod
